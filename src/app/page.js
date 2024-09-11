@@ -5,7 +5,7 @@ import Image from "next/image";
 export default function Home() {
   return (
     <>
-      {/* <InfinityHero /> */}
+      <InfinityHero />
       <div className="mb-4 bg-gray-200 p-4">
         <div className="bg-white text-black p-8 leading-loose">
           <p>

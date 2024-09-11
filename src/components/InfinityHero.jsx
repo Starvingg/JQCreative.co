@@ -1,119 +1,213 @@
 "use client"
-import React, { useRef, useMemo, useEffect } from 'react';
-import * as THREE from 'three';
-import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
 
-// Constants for Figure8Particles
-const PARTICLE_COUNT = 9000;
-const CURVE_SEGMENTS = 64;
-const THICKNESS = 2.5;
-const LERP_FACTOR = 0.01;
+import React, { useRef, useMemo, useEffect, useState } from 'react'
+import * as THREE from 'three'
+import { Canvas, useFrame, useThree } from "@react-three/fiber"
+import { OrbitControls, PerspectiveCamera } from "@react-three/drei"
 
-// Helper function to get a point on the tube's surface
-function getPointOnTube(curve, t, radius) {
-  const position = new THREE.Vector3();
-  const normal = new THREE.Vector3();
-  curve.getPointAt(t, position);
-  curve.getTangentAt(t, normal);
-  const up = new THREE.Vector3(0, 1, 0);
-  const axis = new THREE.Vector3().crossVectors(up, normal).normalize();
-  const radialAngle = Math.random() * Math.PI * 2;
-  const binormal = new THREE.Vector3().crossVectors(normal, axis);
-  const radialVector = new THREE.Vector3()
-    .addScaledVector(axis, Math.cos(radialAngle))
-    .addScaledVector(binormal, Math.sin(radialAngle));
-  position.add(radialVector.multiplyScalar(radius));
-  return { position, normal: radialVector };
+// Adjustable parameters
+const PARAMS = {
+  PARTICLE_COUNT: 9000,
+  CURVE_SEGMENTS: 64,
+  THICKNESS: 3.5,
+  LERP_FACTOR: 0.01,
+  INITIAL_CAMERA_DISTANCE: 2.75,
+  MAX_CAMERA_DISTANCE: 5,
+  MAX_SCROLL: 1000,
+  FOG_NEAR_FACTOR: 0.1,
+  FOG_FAR_FACTOR: 0.5,
+  FOG_DENSITY: 0.75,
 }
 
-// Figure8Particles component
+function getPointOnTube(curve, t, radius) {
+  const position = new THREE.Vector3()
+  const normal = new THREE.Vector3()
+  curve.getPointAt(t, position)
+  curve.getTangentAt(t, normal)
+  const up = new THREE.Vector3(0, 1, 0)
+  const axis = new THREE.Vector3().crossVectors(up, normal).normalize()
+  const radialAngle = Math.random() * Math.PI * 2
+  const binormal = new THREE.Vector3().crossVectors(normal, axis)
+  const radialVector = new THREE.Vector3()
+    .addScaledVector(axis, Math.cos(radialAngle))
+    .addScaledVector(binormal, Math.sin(radialAngle))
+  position.add(radialVector.multiplyScalar(radius))
+  return { position, normal: radialVector }
+}
+
 const Figure8Particles = () => {
-  const instancedMesh = useRef(null);
-  const dummy = useMemo(() => new THREE.Object3D(), []);
-  const clock = useRef(new THREE.Clock());
+  const instancedMesh = useRef(null)
+  const dummy = useMemo(() => new THREE.Object3D(), [])
+  const clock = useRef(new THREE.Clock())
   
-  const particlePositions = useMemo(() => new Array(PARTICLE_COUNT).fill(0).map(() => new THREE.Vector3()), []);
-  const targetPositions = useMemo(() => new Array(PARTICLE_COUNT).fill(0).map(() => new THREE.Vector3()), []);
+  const particlePositions = useMemo(() => new Array(PARAMS.PARTICLE_COUNT).fill(0).map(() => new THREE.Vector3()), [])
+  const targetPositions = useMemo(() => new Array(PARAMS.PARTICLE_COUNT).fill(0).map(() => new THREE.Vector3()), [])
   const curve = useMemo(() => {
     return new THREE.CatmullRomCurve3(
-      Array(CURVE_SEGMENTS).fill(0).map((_, i) => {
-        const t = i / CURVE_SEGMENTS;
-        const x = Math.sin(t * Math.PI * 2) * 2;
-        const y = Math.sin(t * Math.PI * 4);
-        const z = Math.cos(t * Math.PI * 2);
-        return new THREE.Vector3(x, y, z);
+      Array(PARAMS.CURVE_SEGMENTS).fill(0).map((_, i) => {
+        const t = i / PARAMS.CURVE_SEGMENTS
+        const x = Math.sin(t * Math.PI * 2) * 3
+        const y = Math.sin(t * Math.PI * 4) * 1.5
+        const z = Math.cos(t * Math.PI * 2) * 1.5
+        return new THREE.Vector3(x, y, z)
       }),
       true
-    );
-  }, []);
-  const radius = THICKNESS / 2;
+    )
+  }, [])
+  const radius = PARAMS.THICKNESS / 2
 
   useFrame(() => {
     if (instancedMesh.current) {
-      const time = clock.current.getElapsedTime();
+      const time = clock.current.getElapsedTime()
       
-      for (let i = 0; i < PARTICLE_COUNT; i++) {
-        const t = (i / PARTICLE_COUNT + time * 0.1) % 1;
-        const { position, normal } = getPointOnTube(curve, t, radius);
+      for (let i = 0; i < PARAMS.PARTICLE_COUNT; i++) {
+        const t = (i / PARAMS.PARTICLE_COUNT + time * 0.1) % 1
+        const { position, normal } = getPointOnTube(curve, t, radius)
         
-        targetPositions[i].copy(position).add(normal.multiplyScalar(Math.random() * radius));
-        particlePositions[i].lerp(targetPositions[i], LERP_FACTOR);
-        dummy.position.copy(particlePositions[i]);
-        dummy.scale.setScalar(0.005);
-        dummy.updateMatrix();
-        instancedMesh.current.setMatrixAt(i, dummy.matrix);
+        targetPositions[i].copy(position).add(normal.multiplyScalar(Math.random() * radius))
+        particlePositions[i].lerp(targetPositions[i], PARAMS.LERP_FACTOR)
+        dummy.position.copy(particlePositions[i])
+        dummy.scale.setScalar(0.01)
+        dummy.updateMatrix()
+        instancedMesh.current.setMatrixAt(i, dummy.matrix)
       }
       
-      instancedMesh.current.instanceMatrix.needsUpdate = true;
+      instancedMesh.current.instanceMatrix.needsUpdate = true
     }
-  });
+  })
 
   return (
-    <instancedMesh ref={instancedMesh} args={[undefined, undefined, PARTICLE_COUNT]}>
+    <instancedMesh ref={instancedMesh} args={[null, null, PARAMS.PARTICLE_COUNT]}>
       <sphereGeometry args={[1, 4, 4]} />
       <meshBasicMaterial color="#ffffff" />
     </instancedMesh>
-  );
-};
+  )
+}
 
-// FloatingParticles component
-const FloatingParticles = () => {
-  // Placeholder for FloatingParticles implementation
-  return null;
-};
+const Rig = ({ scroll }) => {
+  const { scene, camera } = useThree()
+  
+  useFrame(() => {
+    if (camera && scene) {
+      const normalizedScroll = Math.min(scroll / PARAMS.MAX_SCROLL, 1)
+      const currentCameraDistance = THREE.MathUtils.lerp(
+        PARAMS.INITIAL_CAMERA_DISTANCE,
+        PARAMS.MAX_CAMERA_DISTANCE,
+        normalizedScroll
+      )
+      
+      camera.position.setLength(currentCameraDistance)
+      
+      const fogDensity = THREE.MathUtils.lerp(0, PARAMS.FOG_DENSITY, normalizedScroll)
+      scene.fog = new THREE.FogExp2(0x000000, fogDensity)
+    }
+  })
+  
+  return null
+}
 
-// Overlay component
+const Scene = ({ scroll }) => {
+  const controlsRef = useRef()
+  const [lastInteraction, setLastInteraction] = useState(0)
+  const { camera } = useThree()
+  
+  useEffect(() => {
+    if (controlsRef.current && camera) {
+      camera.position.set(0, 0, PARAMS.INITIAL_CAMERA_DISTANCE)
+      controlsRef.current.update()
+    }
+  }, [camera])
+
+  useFrame(({ clock }) => {
+    if (!controlsRef.current || !camera) return
+    
+    const timeSinceInteraction = clock.getElapsedTime() - lastInteraction
+    const scrollFactor = Math.min(scroll / PARAMS.MAX_SCROLL, 1)
+
+    if (timeSinceInteraction > 3 || scrollFactor > 0) {
+      const resetFactor = Math.max(timeSinceInteraction > 3 ? 0.05 : 0, scrollFactor * 0.1)
+      const targetPosition = new THREE.Vector3(0, 0, PARAMS.INITIAL_CAMERA_DISTANCE)
+      camera.position.lerp(targetPosition, resetFactor)
+      controlsRef.current.update()
+    }
+  })
+
+  const handleInteraction = () => {
+    setLastInteraction(Date.now() / 1000)
+  }
+
+  return (
+    <>
+      <Figure8Particles />
+      <OrbitControls 
+        ref={controlsRef}
+        enableZoom={false} 
+        enablePan={false} 
+        target={[0, 0, 0]}
+        maxPolarAngle={Math.PI}
+        minPolarAngle={0}
+        onChange={handleInteraction}
+      />
+      <Rig scroll={scroll} />
+    </>
+  )
+}
+
 const Overlay = () => {
   return (
-    <div className="fixed z-10 text-white inset-0 blur-[0.5px] flex items-center justify-end p-6 gap-2 flex-col pointer-events-none">
-      <h5 className="text-2xl">Collective patience</h5>
-      <p className="text-xs text-center opacity-70 max-w-xs">
-        Time is an infinite field. Millions and millions of interlocking wheels. We have to be patient to be victorious.
-        <br />
-        <br />
-        Our mistake in all of our thinking is that we each believe ourselves to be an independent entity; one self beside countless other selves. While in reality, we're all just small fractions of an infinite whole."
-      </p>
-    </div>   
-  );
-};
-
-// Main component
-const InfinityHero = () => {
-  return (
-    <div className="fixed w-full border-red-500 border-4 inset-0">
-      <div className="fixed w-full top-0 left-0 right-0 bottom-0">
-        <Canvas camera={{ position: [0, 0, 2], fov: 75 }}>
-          <color attach="background" args={["black"]} />
-          <fog attach="fog" args={['#000000', 2, 3]} />
-          <Figure8Particles />
-          <FloatingParticles />
-          <OrbitControls />
-        </Canvas>
+    <div className="absolute inset-0 flex items-center justify-end p-6 pointer-events-none">
+      <div className="text-white text-right">
+        <h5 className="text-2xl mb-2">Collective patience</h5>
+        <p className="text-xs opacity-70 max-w-xs">
+          Time is an infinite field. Millions and millions of interlocking wheels. We have to be patient to be victorious.
+          <br />
+          <br />
+          Our mistake in all of our thinking is that we each believe ourselves to be an independent entity; one self beside countless other selves. While in reality, we're all just small fractions of an infinite whole.
+        </p>
       </div>
-      <Overlay />
-    </div>
-  );
-};
+    </div>   
+  )
+}
 
-export default InfinityHero;
+const InfinityHero = () => {
+  const [scroll, setScroll] = useState(0)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScroll(window.scrollY)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  return (
+    <div className="relative bg-black text-white">
+      <div className="h-screen sticky top-0 w-full">
+        <Canvas style={{ width: '100%', height: '100%' }}>
+          <PerspectiveCamera makeDefault position={[0, 0, PARAMS.INITIAL_CAMERA_DISTANCE]} fov={75} />
+          <color attach="background" args={["black"]} />
+          <Scene scroll={scroll} />
+        </Canvas>
+        <Overlay />
+      </div>
+      <div className="relative z-10">
+        <div className="container mx-auto px-4 py-16">
+          <h2 className="text-3xl font-bold mb-4">Scroll Down Content</h2>
+          <p className="mb-2">This is the main content of the webpage.</p>
+          <p className="mb-2">As you scroll, the figure eight animation will quickly disappear into black fog.</p>
+          <p className="mb-2">The camera orbits around the figure eight, which maintains its position.</p>
+          <p className="mb-2">The camera view will return to its default position 3 seconds after interaction or as you scroll.</p>
+        </div>
+        {[...Array(10)].map((_, index) => (
+          <div key={index} className="container mx-auto px-4 py-16">
+            <h3 className="text-2xl font-bold mb-4">Section {index + 1}</h3>
+            <p className="mb-2">This is additional content to demonstrate scrolling.</p>
+            <p className="mb-2">As you scroll, the Three.js animation will quickly disappear into the black fog.</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+export default InfinityHero

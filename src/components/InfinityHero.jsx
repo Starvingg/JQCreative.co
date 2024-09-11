@@ -188,7 +188,7 @@ const InfinityHero = () => {
           <color attach="background" args={["black"]} />
           <Scene scroll={scroll} />
         </Canvas>
-        <Overlay />
+        {/* <Overlay /> */}
       </div>
       <div className="relative z-10">
         <div className="container mx-auto px-4 py-16">

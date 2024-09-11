@@ -70,13 +70,10 @@ export function Header() {
     <header className="bg-white shadow-md fixed top-0 left-0 w-full z-50">
       <div className="max-w-screen-2xl mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
-          <Link href="/" className="text-2xl font-bold text-gray-800">
-            <svg className="w-10 h-10" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="20" cy="20" r="20" fill="#4A90E2" />
-              <path d="M12 20L18 26L28 16" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            <span className="sr-only">Creative Agency</span>
-          </Link>
+        <Link href="/" className="text-2xl font-bold text-gray-800">
+  <img src="/images/JQC_SVG_LOGO.svg" alt="Creative Agency Logo" className="h-10" />
+  <span className="sr-only">Creative Agency</span>
+</Link>
 
           {/* Desktop Menu */}
           <nav className="hidden md:flex items-center space-x-6">

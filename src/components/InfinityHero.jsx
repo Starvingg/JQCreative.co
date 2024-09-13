@@ -19,6 +19,33 @@ const PARAMS = {
   FOG_DENSITY: 0.75,
 }
 
+const sectionsData = [
+  {
+    title: "JQ Creative",
+    content: [
+      "A Modern Software Development Agency.",
+    ]
+  },
+  {
+    title: "Delivering Returns",
+    content: [
+      "Through strategic planning, insightful questioning, and leveraging our extensive network."
+    ]
+  },
+  {
+    title: "Building Partnerships",
+    content: [
+      "We build the next level for our clients by understanding them and the business they are in.",
+    ]
+  },
+  {
+    title: "Building Business Value",
+    content: [
+      "We are able to grow business value, capture revenue, or build your new product.",
+    ]
+  }
+]
+
 function getPointOnTube(curve, t, radius) {
   const position = new THREE.Vector3()
   const normal = new THREE.Vector3()
@@ -191,18 +218,12 @@ const InfinityHero = () => {
         {/* <Overlay /> */}
       </div>
       <div className="relative z-10">
-        <div className="container mx-auto px-4 py-16">
-          <h2 className="text-3xl font-bold mb-4">Scroll Down Content</h2>
-          <p className="mb-2">This is the main content of the webpage.</p>
-          <p className="mb-2">As you scroll, the figure eight animation will quickly disappear into black fog.</p>
-          <p className="mb-2">The camera orbits around the figure eight, which maintains its position.</p>
-          <p className="mb-2">The camera view will return to its default position 3 seconds after interaction or as you scroll.</p>
-        </div>
-        {[...Array(10)].map((_, index) => (
-          <div key={index} className="container mx-auto px-4 py-16">
-            <h3 className="text-2xl font-bold mb-4">Section {index + 1}</h3>
-            <p className="mb-2">This is additional content to demonstrate scrolling.</p>
-            <p className="mb-2">As you scroll, the Three.js animation will quickly disappear into the black fog.</p>
+        {sectionsData.map((section, index) => (
+          <div key={index} className="container mx-auto px-4 py-8">
+            <h2 className="text-3xl font-bold mb-4">{section.title}</h2>
+            {section.content.map((paragraph, idx) => (
+              <p key={idx} className="mb-2">{paragraph}</p>
+            ))}
           </div>
         ))}
       </div>

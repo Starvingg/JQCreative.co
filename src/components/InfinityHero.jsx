@@ -27,7 +27,7 @@ const sectionsData = [
     ]
   },
   {
-    title: "Delivering Returns",
+    title: "Generating Returns",
     content: [
       "Through strategic planning, insightful questioning, and leveraging our extensive network."
     ]
@@ -219,7 +219,7 @@ const InfinityHero = () => {
       </div>
       <div className="relative z-10">
         {sectionsData.map((section, index) => (
-          <div key={index} className="container mx-auto px-4 py-8">
+          <div key={index} className="container mx-auto px-4 py-16">
             <h2 className="text-3xl font-bold mb-4">{section.title}</h2>
             {section.content.map((paragraph, idx) => (
               <p key={idx} className="mb-2">{paragraph}</p>

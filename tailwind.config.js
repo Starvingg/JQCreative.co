@@ -8,6 +8,10 @@ module.exports = {
   ],
   theme: {
   	extend: {
+		fontFamily: {
+			switzerFont: ["var(--font-switzer)"],
+			switzerItalic: ["var(--font-switzer-italic)"],
+		  },
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',

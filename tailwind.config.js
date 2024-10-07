@@ -11,6 +11,7 @@ module.exports = {
 		fontFamily: {
 			switzerFont: ["var(--font-switzer)"],
 			switzerItalic: ["var(--font-switzer-italic)"],
+			outfitFont: ["var(--font-outfit)"],
 		  },
   		colors: {
   			background: 'hsl(var(--background))',

@@ -217,6 +217,8 @@ const InfinityHero = () => {
         </Canvas>
         {/* <Overlay /> */}
       </div>
+      
+
       <div className="relative z-10">
         {sectionsData.map((section, index) => (
           <div key={index} className="container mx-auto px-4 py-16">
@@ -227,6 +229,8 @@ const InfinityHero = () => {
           </div>
         ))}
       </div>
+
+
     </div>
   )
 }

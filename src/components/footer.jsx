@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Instagram, Facebook, Twitter, Linkedin } from 'lucide-react'
+import Image from 'next/image'
 import { useState } from 'react'
 
 export default function Footer() {
@@ -52,16 +52,31 @@ export default function Footer() {
           </nav>
           <div className="flex space-x-4">
             <a href="#" className="text-gray-400 hover:text-white transition duration-300">
-              <Instagram size={24} />
+              <Image
+                src="/images/social-icons/Instagram_SocialMedia.svg"
+                alt="Instagram"
+                width={24}
+                height={24}
+                className="transition-opacity duration-300 hover:opacity-80"
+              />
             </a>
             <a href="#" className="text-gray-400 hover:text-white transition duration-300">
-              <Facebook size={24} />
+              <Image
+                src="/images/social-icons/X_SocialMedia.svg"
+                alt="X"
+                width={24}
+                height={24}
+                className="transition-opacity duration-300 hover:opacity-80"
+              />
             </a>
             <a href="#" className="text-gray-400 hover:text-white transition duration-300">
-              <Twitter size={24} />
-            </a>
-            <a href="#" className="text-gray-400 hover:text-white transition duration-300">
-              <Linkedin size={24} />
+              <Image
+                src="/images/social-icons/LinkedIn_SocialMedia.svg"
+                alt="LinkedIn"
+                width={24}
+                height={24}
+                className="transition-opacity duration-300 hover:opacity-80"
+              />
             </a>
           </div>
         </div>

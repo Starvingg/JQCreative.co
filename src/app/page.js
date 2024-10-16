@@ -6,7 +6,6 @@ import InfinityHero from "@/components/InfinityHero";
 export default function Home() {
   return (
     <>
-      <InfinityHero />
       <FontTest />
       <Footer />
     </>

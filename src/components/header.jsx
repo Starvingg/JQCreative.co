@@ -68,7 +68,7 @@ export default function Header() {
                 <img
                   src="/images/JQC_SVG_LOGO.svg"
                   alt="Creative Agency Logo"
-                  className="h-10"
+                  className="h-6"
                 />
               </Link>
             </div>
@@ -160,38 +160,57 @@ export default function Header() {
       <AnimatePresence>
         {isOpen && (
           <motion.nav
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-light  backdrop-blur bg-opacity-90 rounded-b-2xl mt-2 mx-2 fixed top-14 left-0 right-0 z-40"
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "100%" }}
+            transition={{ type: "tween" }}
+            className="fixed inset-0 bg-white z-50 overflow-y-auto"
           >
-            <div className="px-2 pt-2 pb-3 space-y-1">
+            <div className="flex justify-between items-center py-4 px-6 border-b">
+              <div className="flex-shrink-0">
+                <Image
+                  src="/images/JQC_SVG_LOGO.svg"
+                  alt="Logo"
+                  width={64}
+                  height={64}
+                />
+              </div>
+              <button
+                className="text-gray-500 hover:text-gray-600 focus:outline-none"
+                onClick={toggleMenu}
+                aria-label="Close menu"
+              >
+                <X className="h-6 w-6" />
+              </button>
+            </div>
+            <div className="py-6 px-6 space-y-6">
               <Link
                 href="/services"
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 transition duration-300"
+                className="block text-gray-800 text-xl font-medium"
               >
                 Services
               </Link>
               <Link
                 href="/products"
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 transition duration-300"
+                className="block text-gray-800 text-xl font-medium"
               >
                 Products
               </Link>
               <Link
                 href="/blog"
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 transition duration-300"
+                className="block text-gray-800 text-xl font-medium"
               >
                 Blog
               </Link>
-              <div className="relative">
+              <div>
                 <button
                   onClick={toggleMobileCompanyMenu}
-                  className="flex justify-between items-center w-full px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 transition duration-300"
+                  className="flex items-center justify-between w-full text-gray-800 text-xl font-medium"
+                  aria-expanded={isMobileCompanyMenuOpen}
                 >
-                  <span>Company</span>
+                  Company
                   <ChevronDown
-                    className={`h-4 w-4 transform transition-transform duration-200 ${isMobileCompanyMenuOpen ? "rotate-180" : ""}`}
+                    className={`h-5 w-5 transform transition-transform duration-200 ${isMobileCompanyMenuOpen ? "rotate-180" : ""}`}
                   />
                 </button>
                 <AnimatePresence>
@@ -201,7 +220,7 @@ export default function Header() {
                       animate={{ opacity: 1, height: "auto" }}
                       exit={{ opacity: 0, height: 0 }}
                       transition={{ duration: 0.2 }}
-                      className="mt-2 pl-4 space-y-1"
+                      className="mt-2  space-y-1"
                     >
                       <Link
                         href="/about"
@@ -219,12 +238,6 @@ export default function Header() {
                   )}
                 </AnimatePresence>
               </div>
-              <Link
-                href="/contact"
-                className="block px-3 py-2 rounded-md text-base font-medium text-white bg-blue-600 hover:bg-blue-700 transition duration-300 text-center"
-              >
-                Contact Us
-              </Link>
             </div>
           </motion.nav>
         )}

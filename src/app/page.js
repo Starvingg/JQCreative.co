@@ -5,6 +5,7 @@ import InfinityHero from "@/components/InfinityHero";
 import LogoCarousel from "@/components/logo-carousel";
 import OurProcess from "@/components/our-process";
 import ScrollBar from "@/components/scroll-bar";
+import TestimonialSection from "@/components/testimonials";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <ScrollBar />
       <LogoCarousel />
       <OurProcess />
+      <TestimonialSection />
       <FontTest />
       <Footer />
     </>

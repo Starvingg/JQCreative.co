@@ -59,7 +59,7 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed  top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled ? "" : ""}`}
+        className={` sticky top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled ? "" : ""}`}
       >
         <div className="w-full  ">
           <div className="flex justify-between items-center  ring-1 ring-muted   bg-opacity-90 backdrop-blur-md      py-3">

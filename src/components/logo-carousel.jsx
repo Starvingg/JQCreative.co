@@ -84,10 +84,10 @@ export default function LogoCarousel() {
   }, []);
 
   return (
-    <div className="relative  w-full overflow-hidden py-5">
+    <div className="relative  w-full overflow-hidden py-5 bg-red-400">
       <div
         ref={containerRef}
-        className={`flex flex-row items-center h-16 ${isReady ? "animate-slide" : ""}`}
+        className={`flex  flex-row items-center h-16 ${isReady ? "animate-slide" : ""}`}
       >
         {[...logos, ...logos].map((logo, index) => (
           <div

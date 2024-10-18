@@ -23,6 +23,7 @@ module.exports = {
         dark: "#374151", // Gray 700
         darker: "#111827", // Gray 900 (Dark background)
       },
+
       backgroundColor: {
         primary: "#2563EB", // Primary Blue
         secondary: "#1D4ED8", // Dark Blue (Used for hover states)

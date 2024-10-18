@@ -6,53 +6,52 @@ import Image from "next/image";
 const logos = [
   {
     id: 1,
-    src: "/gallery/logos/JQC_Client_Black-01_Hotworx.svg",
+    src: "/images/gallery/logos/JQC_Client_Black-01_Hotworx.svg",
     alt: "Client 1",
   },
   {
     id: 2,
-    src: "/gallery/logos/JQC_Client_Black-02_Dotdigital.svg",
+    src: "images/gallery/logos/JQC_Client_Black-02_Dotdigital.svg",
     alt: "Client 2",
   },
   {
     id: 3,
-    src: "/gallery/logos/JQC_Client_Black-03_EliteAmenity.svg",
+    src: "images/gallery/logos/JQC_Client_Black-03_EliteAmenity.svg",
     alt: "Client 3",
   },
   {
     id: 4,
-    src: "gallery/logos/JQC_Client_Black-04_SuitUp.svg",
+    src: "images/gallery/logos/JQC_Client_Black-04_SuitUp.svg",
     alt: "Client 4",
   },
   {
     id: 5,
-    src: "/gallery/logos/JQC_Client_Black_10_Ootd.svg",
-
+    src: "images/gallery/logos/JQC_Client_Black_10_Ootd.svg",
     alt: "Client 5",
   },
   {
     id: 6,
-    src: "/gallery/logos/JQC_Client_Black-05_JacksJokers.svg",
+    src: "images/gallery/logos/JQC_Client_Black-05_JacksJokers.svg",
     alt: "Client 6",
   },
   {
     id: 7,
-    src: "/gallery/logos/JQC_Client_Black-06_Pinkloud.svg",
+    src: "images/gallery/logos/JQC_Client_Black-06_Pinkloud.svg",
     alt: "Client 7",
   },
   {
     id: 8,
-    src: "/gallery/logos/JQC_Client_Black-07_SpringPlace.svg",
+    src: "images/gallery/logos/JQC_Client_Black-07_SpringPlace.svg",
     alt: "Client 8",
   },
   {
     id: 9,
-    src: "/gallery/logos/JQC_Client_Black-08_Daphne.svg",
+    src: "images/gallery/logos/JQC_Client_Black-08_Daphne.svg",
     alt: "Client 9",
   },
   {
     id: 10,
-    src: "/gallery/logos/JQC_Client_Black-09_Downtime.svg",
+    src: "images/gallery/logos/JQC_Client_Black-09_Downtime.svg",
     alt: "Client 10",
   },
 ];
@@ -84,7 +83,7 @@ export default function LogoCarousel() {
   }, []);
 
   return (
-    <div className="relative  w-full overflow-hidden py-5 bg-red-400">
+    <div className="relative  w-full overflow-hidden py-5">
       <div
         ref={containerRef}
         className={`flex  flex-row items-center h-16 ${isReady ? "animate-slide" : ""}`}

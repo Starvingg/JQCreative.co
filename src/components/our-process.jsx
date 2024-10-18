@@ -90,7 +90,7 @@ export default function OurProcess() {
   const [activeTab, setActiveTab] = useState("Research");
 
   return (
-    <section className="bg-white py-16 overflow-hidden">
+    <section className="bg-light py-16 overflow-hidden">
       <div className="container mx-auto px-4 relative">
         <h2 className="text-4xl font-bold mb-8 text-gray-900">
           Our Design Process
@@ -105,10 +105,11 @@ export default function OurProcess() {
             {Object.keys(contentItems).map((item) => (
               <button
                 key={item}
-                className={`block w-full text-left py-2 px-4 rounded-lg mb-2 transition-colors ${activeTab === item
-                    ? "bg-gray-200 text-gray-900"
-                    : "text-gray-600 hover:bg-gray-100"
-                  }`}
+                className={`block w-full text-left py-2 px-4 rounded-lg mb-2 transition-colors ${
+                  activeTab === item
+                    ? "bg-muted text-daker"
+                    : "text-dark hover:text-primary hover:ring-1 ring-muted "
+                }`}
                 onClick={() => setActiveTab(item)}
               >
                 {item}
@@ -124,24 +125,16 @@ export default function OurProcess() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
-              className="bg-gray-100 rounded-lg p-8 relative overflow-hidden"
+              className="bg-muted shadow-md rounded-lg p-8 relative overflow-hidden"
             >
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center">
-                  <div className="p-2 rounded-full bg-gray-200 mr-4">
+                  <div className="p-2 rounded-full bg-muted mr-4">
                     {contentItems[activeTab].icon}
                   </div>
-                  <h3 className="text-2xl font-semibold text-gray-900">
+                  <h3 className="text-2xl font-semibold text-darker">
                     {contentItems[activeTab].heading}
                   </h3>
-                </div>
-                <div className="flex space-x-2">
-                  <button className="p-1 rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300">
-                    <ChevronLeft className="h-5 w-5" />
-                  </button>
-                  <button className="p-1 rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300">
-                    <ChevronRight className="h-5 w-5" />
-                  </button>
                 </div>
               </div>
 

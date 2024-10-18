@@ -1,28 +1,5 @@
-import {
-  BellIcon,
-  CalendarIcon,
-  FileTextIcon,
-  GlobeIcon,
-  InputIcon,
-} from "@radix-ui/react-icons";
-
 import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
-import {
-  CheckCircle,
-  ChevronDown,
-  Menu,
-  X,
-  Instagram,
-  Facebook,
-  Twitter,
-  Linkedin,
-  Zap,
-  Shield,
-  Target,
-  TrendingUp,
-  Building,
-  Cpu,
-} from "lucide-react";
+import { Zap, Shield, Target, TrendingUp, Building, Cpu } from "lucide-react";
 const features = [
   {
     Icon: Zap,

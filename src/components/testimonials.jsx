@@ -1,8 +1,9 @@
-"use client";
+"use client"
 
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
+import React, { useState, useEffect } from "react"
+import { motion, AnimatePresence } from "framer-motion"
+import Image from "next/image"
+
 const testimonials = [
   {
     id: 1,
@@ -28,32 +29,19 @@ const testimonials = [
     text: "The team's expertise in web development and design is unparalleled. They delivered a website that not only looks great but also performs exceptionally well. Our conversion rates have skyrocketed!",
     date: "Dec 5, 2022",
   },
-];
+]
 
-const TestimonialCard = ({ testimonial, index, currentIndex }) => {
-  const isActive = index === currentIndex;
-  const zIndex = testimonials.length - Math.abs(index - currentIndex);
-
+const TestimonialCard = ({ testimonial }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 50, scale: 0.9 }}
-      animate={{
-        opacity: isActive ? 1 : 0.7,
-        y: isActive ? 0 : 20,
-        scale: isActive ? 1 : 0.95,
-        zIndex: zIndex,
-      }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: -50, scale: 0.9 }}
       transition={{ duration: 0.5 }}
-      className="bg-white p-6 rounded-lg shadow-md absolute w-full left-0 right-0"
-      style={{
-        boxShadow:
-          "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
-        transform: `translateY(${(index - currentIndex) * 10}px)`,
-      }}
+      className="bg-white p-6 rounded-lg shadow-md w-full"
     >
       <div className="flex items-center mb-4">
-        <Image
+        <img
           src={testimonial.image}
           alt={testimonial.name}
           width={50}
@@ -70,24 +58,26 @@ const TestimonialCard = ({ testimonial, index, currentIndex }) => {
       </p>
       <p className="text-sm text-gray-500">{testimonial.date}</p>
     </motion.div>
-  );
-};
+  )
+}
 
 export default function TestimonialSection() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
+    setIsClient(true)
     const timer = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
-    }, 3000);
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length)
+    }, 3000)
 
-    return () => clearInterval(timer);
-  }, []);
+    return () => clearInterval(timer)
+  }, [])
 
   return (
     <section className="py-12 sm:py-20 bg-muted">
-      <div className="container mx-auto px-4 ">
-        <div className="flex flex-col lg:flex-row  gap-4 items-center">
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col lg:flex-row gap-4 items-center">
           <div className="w-full lg:w-1/2 mb-8 lg:mb-0">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
               What Our Customers Say
@@ -99,20 +89,18 @@ export default function TestimonialSection() {
           </div>
           <div className="w-full lg:w-1/2 relative h-[400px] sm:h-[300px]">
             <div className="absolute inset-0 flex items-center justify-center">
-              <AnimatePresence mode="wait">
-                {testimonials.map((testimonial, index) => (
+              {isClient && (
+                <AnimatePresence mode="wait">
                   <TestimonialCard
-                    key={testimonial.id}
-                    testimonial={testimonial}
-                    index={index}
-                    currentIndex={currentIndex}
+                    key={testimonials[currentIndex].id}
+                    testimonial={testimonials[currentIndex]}
                   />
-                ))}
-              </AnimatePresence>
+                </AnimatePresence>
+              )}
             </div>
           </div>
         </div>
       </div>
     </section>
-  );
+  )
 }

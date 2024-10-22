@@ -93,14 +93,14 @@ export default function LogoCarousel() {
             key={`${logo.id}-${index}`}
             className="flex-shrink-0 w-[150px] mx-[30px] md:mx-[60px] lg:mx-[70px] flex items-center justify-center"
           >
-            <Image
+            <img
               src={logo.src}
               alt={logo.alt}
               width={150}
               height={100}
               sizes="(max-width:768px) 100px, 150px"
-              priority={index < 3}
-              className="max-h-20 w-auto object-contain logo-image"
+              // priority={index < 3}
+              className="max-h-20 h-auto object-contain logo-image"
             />
           </div>
         ))}

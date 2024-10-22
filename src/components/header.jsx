@@ -1,68 +1,70 @@
-"use client";
+'use client'
 
-import { useState, useEffect, useRef } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { useState, useEffect, useRef } from "react"
+import Image from "next/image"
+import Link from "next/link"
+import { motion, AnimatePresence } from "framer-motion"
+import { ChevronDown, Menu, X } from "lucide-react"
 
 export default function Header() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isCompanyMenuOpen, setIsCompanyMenuOpen] = useState(false);
-  const [isMobileCompanyMenuOpen, setIsMobileCompanyMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const timeoutRef = useRef(null);
+  const [isOpen, setIsOpen] = useState(false)
+  const [isCompanyMenuOpen, setIsCompanyMenuOpen] = useState(false)
+  const [isMobileCompanyMenuOpen, setIsMobileCompanyMenuOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
+  const timeoutRef = useRef(null)
 
-  const toggleMenu = () => setIsOpen(!isOpen);
+  const toggleMenu = () => setIsOpen(!isOpen)
 
   const toggleMobileCompanyMenu = () => {
-    setIsMobileCompanyMenuOpen((prev) => !prev);
-  };
+    setIsMobileCompanyMenuOpen((prev) => !prev)
+  }
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
+      setIsScrolled(window.scrollY > 10)
+    }
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll)
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [])
 
   const handleCompanyMouseEnter = () => {
     if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
+      clearTimeout(timeoutRef.current)
     }
-    setIsCompanyMenuOpen(true);
-  };
+    setIsCompanyMenuOpen(true)
+  }
 
   const handleCompanyMouseLeave = () => {
     timeoutRef.current = setTimeout(() => {
-      setIsCompanyMenuOpen(false);
-    }, 250);
-  };
+      setIsCompanyMenuOpen(false)
+    }, 250)
+  }
 
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = "hidden"
     } else {
-      document.body.style.overflow = "visible";
+      document.body.style.overflow = "visible"
     }
 
     return () => {
-      document.body.style.overflow = "visible";
-    };
-  }, [isOpen]);
+      document.body.style.overflow = "visible"
+    }
+  }, [isOpen])
 
   return (
     <>
       <header
-        className={` sticky top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled ? "" : ""}`}
+        className={`sticky top-0 left-0 w-full z-50 transition-all duration-300 ${
+          isScrolled ? "" : ""
+        }`}
       >
-        <div className="w-full  ">
-          <div className="flex justify-between items-center  ring-1 ring-muted   bg-opacity-90 backdrop-blur-md      py-3">
+        <div className="w-full">
+          <div className="flex justify-between items-center ring-1 ring-muted bg-opacity-90 backdrop-blur-md py-3">
             <div className="flex-shrink-0 px-4">
               <Link href="/" className="flex items-center space-x-2">
                 <img
@@ -120,11 +122,7 @@ export default function Header() {
               onClick={toggleMenu}
             >
               <span className="sr-only">Toggle menu</span>
-              {isOpen ? (
-                <X className="h-6 w-6" />
-              ) : (
-                <Menu className="h-6 w-6" />
-              )}
+              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
         </div>
@@ -134,6 +132,7 @@ export default function Header() {
       <AnimatePresence>
         {isCompanyMenuOpen && (
           <motion.div
+            key="company-menu"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
@@ -160,6 +159,7 @@ export default function Header() {
       <AnimatePresence>
         {isOpen && (
           <motion.nav
+            key="mobile-menu"
             initial={{ opacity: 0, x: "100%" }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
@@ -210,17 +210,20 @@ export default function Header() {
                 >
                   Company
                   <ChevronDown
-                    className={`h-5 w-5 transform transition-transform duration-200 ${isMobileCompanyMenuOpen ? "rotate-180" : ""}`}
+                    className={`h-5 w-5 transform transition-transform duration-200 ${
+                      isMobileCompanyMenuOpen ? "rotate-180" : ""
+                    }`}
                   />
                 </button>
                 <AnimatePresence>
                   {isMobileCompanyMenuOpen && (
                     <motion.div
+                      key="mobile-company-menu"
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: "auto" }}
                       exit={{ opacity: 0, height: 0 }}
                       transition={{ duration: 0.2 }}
-                      className="mt-2  space-y-1"
+                      className="mt-2 space-y-1"
                     >
                       <Link
                         href="/about"
@@ -243,5 +246,5 @@ export default function Header() {
         )}
       </AnimatePresence>
     </>
-  );
+  )
 }

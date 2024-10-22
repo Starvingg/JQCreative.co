@@ -1,4 +1,3 @@
-
 import { BentoDemo } from "@/components/bent-demo";
 import FontTest from "@/components/font-test";
 import Footer from "@/components/footer";

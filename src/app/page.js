@@ -15,7 +15,7 @@ export default function Home() {
       <ScrollBar />
       <LogoCarousel />
       <BentoDemo />
-      {/* <TestimonialSection /> */}
+      <TestimonialSection />
 
       <OurProcess />
       <Footer />

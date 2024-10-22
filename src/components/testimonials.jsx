@@ -1,81 +1,53 @@
-"use client"
-
-import React, { useState, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import Image from "next/image"
-
-const testimonials = [
+"use client";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
+import { CardStack } from "./ui/card-stack";
+import { Highlight } from "./highlight-section";
+const CARDS = [
+  {
+    id: 0,
+    name: "Manu Arora",
+    designation: "Senior Software Engineer",
+    content: (
+      <p>
+        These cards are amazing, <Highlight>I want to use them</Highlight> in my
+        project. Framer motion is a godsend ngl tbh fam 🙏
+      </p>
+    ),
+  },
   {
     id: 1,
-    name: "Andrew Cano",
-    position: "Product Designer at Tokopedia",
-    image: "/placeholder.svg?height=80&width=80",
-    text: "I can now Delete the Other Apps. I've tried a lot of note taking and to-do list apps. This app is simply the best. Everything I need in one app and it works flawlessly. Everything I need is now in Nulls. Many thanks to the developer for a great app. The developer is very helpful with advice and there is a useful forum and introductory notes.",
-    date: "Oct 29, 2022",
+    name: "Elon Musk",
+    designation: "Senior Shitposter",
+    content: (
+      <p>
+        I dont like this Twitter thing,{" "}
+        <Highlight>deleting it right away</Highlight> because yolo. Instead, I
+        would like to call it <Highlight>X.com</Highlight> so that it can easily
+        be confused with adult sites.
+      </p>
+    ),
   },
   {
     id: 2,
-    name: "Sarah Johnson",
-    position: "Marketing Manager at TechCorp",
-    image: "/placeholder.svg?height=80&width=80",
-    text: "Working with this creative agency has been a game-changer for our brand. Their innovative approach and attention to detail have significantly improved our online presence. Highly recommended!",
-    date: "Nov 15, 2022",
-  },
-  {
-    id: 3,
-    name: "Michael Lee",
-    position: "CEO of StartUp Inc.",
-    image: "/placeholder.svg?height=80&width=80",
-    text: "The team's expertise in web development and design is unparalleled. They delivered a website that not only looks great but also performs exceptionally well. Our conversion rates have skyrocketed!",
-    date: "Dec 5, 2022",
-  },
-]
-
-const TestimonialCard = ({ testimonial }) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 50, scale: 0.9 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, y: -50, scale: 0.9 }}
-      transition={{ duration: 0.5 }}
-      className="bg-white p-6 rounded-lg shadow-md w-full"
-    >
-      <div className="flex items-center mb-4">
-        <img
-          src={testimonial.image}
-          alt={testimonial.name}
-          width={50}
-          height={50}
-          className="rounded-full mr-4"
-        />
-        <div>
-          <h4 className="font-semibold text-lg">{testimonial.name}</h4>
-          <p className="text-sm text-gray-600">{testimonial.position}</p>
-        </div>
-      </div>
-      <p className="text-gray-700 mb-2 text-sm sm:text-base">
-        {testimonial.text}
+    name: "Tyler Durden",
+    designation: "Manager Project Mayhem",
+    content: (
+      <p>
+        The first rule of
+        <Highlight>Fight Club</Highlight> is that you do not talk about fight
+        club. The second rule of
+        <Highlight>Fight club</Highlight> is that you DO NOT TALK about fight
+        club.
       </p>
-      <p className="text-sm text-gray-500">{testimonial.date}</p>
-    </motion.div>
-  )
-}
+    ),
+  },
+];
 
 export default function TestimonialSection() {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [isClient, setIsClient] = useState(false)
-
-  useEffect(() => {
-    setIsClient(true)
-    const timer = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length)
-    }, 3000)
-
-    return () => clearInterval(timer)
-  }, [])
-
   return (
-    <section className="py-12 sm:py-20 bg-muted">
+    <section>
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row gap-4 items-center">
           <div className="w-full lg:w-1/2 mb-8 lg:mb-0">
@@ -89,18 +61,11 @@ export default function TestimonialSection() {
           </div>
           <div className="w-full lg:w-1/2 relative h-[400px] sm:h-[300px]">
             <div className="absolute inset-0 flex items-center justify-center">
-              {isClient && (
-                <AnimatePresence mode="wait">
-                  <TestimonialCard
-                    key={testimonials[currentIndex].id}
-                    testimonial={testimonials[currentIndex]}
-                  />
-                </AnimatePresence>
-              )}
+              <CardStack items={CARDS} />
             </div>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }

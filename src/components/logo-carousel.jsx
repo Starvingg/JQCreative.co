@@ -99,7 +99,7 @@ export default function LogoCarousel() {
               width={150}
               height={100}
               sizes="(max-width:768px) 100px, 150px"
-              priority={index < 3}
+              // priority={index < 3}
               className="max-h-20 h-auto object-contain logo-image"
             />
           </div>

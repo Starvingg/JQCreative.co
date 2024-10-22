@@ -41,7 +41,7 @@ const TestimonialCard = ({ testimonial }) => {
       className="bg-white p-6 rounded-lg shadow-md w-full"
     >
       <div className="flex items-center mb-4">
-        <Image
+        <img
           src={testimonial.image}
           alt={testimonial.name}
           width={50}
@@ -63,8 +63,10 @@ const TestimonialCard = ({ testimonial }) => {
 
 export default function TestimonialSection() {
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
+    setIsClient(true)
     const timer = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length)
     }, 3000)
@@ -87,12 +89,14 @@ export default function TestimonialSection() {
           </div>
           <div className="w-full lg:w-1/2 relative h-[400px] sm:h-[300px]">
             <div className="absolute inset-0 flex items-center justify-center">
-              <AnimatePresence mode="wait">
-                <TestimonialCard
-                  key={testimonials[currentIndex].id}
-                  testimonial={testimonials[currentIndex]}
-                />
-              </AnimatePresence>
+              {isClient && (
+                <AnimatePresence mode="wait">
+                  <TestimonialCard
+                    key={testimonials[currentIndex].id}
+                    testimonial={testimonials[currentIndex]}
+                  />
+                </AnimatePresence>
+              )}
             </div>
           </div>
         </div>

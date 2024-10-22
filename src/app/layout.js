@@ -1,12 +1,14 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import Header from "../components/header";
+import Spline from "@splinetool/react-spline/next";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
 });
+
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
@@ -34,7 +36,13 @@ export default function RootLayout({ children }) {
       <body
         className={`${switzerFont.variable} ${switzerItalic.variable} antialiased`}
       >
-        <Header />
+        <div className="relative h-screen">
+          <Header className="absolute top-0 left-0 w-full z-10" />
+          <Spline
+            scene="https://prod.spline.design/dxr8YOCazC0Ps8GZ/scene.splinecode"
+            className="absolute top-0 left-0 w-full h-full z-0"
+          />
+        </div>
         {children}
       </body>
     </html>

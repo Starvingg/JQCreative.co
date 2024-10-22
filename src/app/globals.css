@@ -60,19 +60,23 @@ Switzer Font Weight Scaling
 800 - Extra Bold
 900 - Black
 */
-
 :root {
-  --background:#ffffff;
-  --foreground: #171717;
+  --background: #385895; /* Blue background */
+  --foreground: #ffffff;  /* Adjust the text color to white for contrast */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground: #ededed;  /* Light text for dark mode */
   }
 }
 
+body {
+  background: linear-gradient(135deg, var(--deep-blue) 0%, var(--light-blue) 50%, var(--deep-blue) 100%);
+  color: var(--foreground);
+  margin: 0; /* Ensure no margin around the body */
+  height: 100vh; /* Make the body take full viewport height */
+}
 h1 {
   font-family: "Outfit-Variable";
   font-weight: 800;

@@ -1,8 +1,6 @@
-"use client";
-
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
-import { Linkedin, Twitter, Instagram } from "lucide-react";
 
 export default function Footer() {
   const [isHovered, setIsHovered] = useState(false);
@@ -13,9 +11,9 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-light text-darker py-12">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between items-center mb-8">
+    <footer className="bg-darker text-light py-12">
+      <div className="container  mx-auto px-4">
+        <div className="flex   flex-row justify-between items-center mb-8">
           <div
             className="mb-4 md:mb-0 cursor-pointer"
             onMouseEnter={() => setIsHovered(true)}
@@ -50,7 +48,7 @@ export default function Footer() {
               </g>
             </svg>
           </div>
-          <nav className="flex flex-col md:flex-row md:space-x-6 space-x-0 mb-4 md:mb-0">
+          <nav className="flex  md:flex-row flex-col  md:space-x-6 space-x-0 mb-4 md:mb-0">
             <Link
               href="/about"
               className="hover:text-primary transition duration-300"
@@ -76,37 +74,52 @@ export default function Footer() {
               Privacy Policy
             </Link>
           </nav>
-          <div className="flex space-x-4">
+          <div className="flex  space-x-4">
             <a
               href="https://www.linkedin.com/company/jqc/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-darker hover:text-primary transition duration-300"
+              className="text-muted hover:text-light transition duration-300"
             >
-              <Linkedin className="w-6 h-6" />
-              <span className="sr-only">LinkedIn</span>
+              <Image
+                src="/images/social-icons/LinkedIn_SocialMedia.svg"
+                alt="LinkedIn"
+                width={24}
+                height={24}
+                className="transition-opacity duration-300 hover:opacity-80"
+              />
             </a>
             <a
               href="https://x.com/JQCreative_Co"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-darker hover:text-primary transition duration-300"
+              className="text-muted hover:text-light transition duration-300"
             >
-              <Twitter className="w-6 h-6" />
-              <span className="sr-only">Twitter</span>
+              <Image
+                src="/images/social-icons/X_SocialMedia.svg"
+                alt="X"
+                width={24}
+                height={24}
+                className="transition-opacity duration-300 hover:opacity-80"
+              />
             </a>
             <a
               href="https://instagram.com/jqcreative.co"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-darker hover:text-primary transition duration-300"
+              className="text-muted hover:text-light transition duration-300"
             >
-              <Instagram className="w-6 h-6" />
-              <span className="sr-only">Instagram</span>
+              <Image
+                src="/images/social-icons/Instagram_SocialMedia.svg"
+                alt="Instagram"
+                width={24}
+                height={24}
+                className="transition-opacity duration-300 hover:opacity-80"
+              />
             </a>
           </div>
         </div>
-        <div className="border-t border-dark pt-8 text-center text-sm text-darker">
+        <div className="border-t border-dark pt-8 text-center text-sm text-muted">
           © {new Date().getFullYear()} JQ Creative Company LLC. All rights
           reserved.
         </div>

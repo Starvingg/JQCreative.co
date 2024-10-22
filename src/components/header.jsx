@@ -152,7 +152,6 @@ export default function Header() {
           </div>
         </div>
       </header>
-
       {/* Company Dropdown Menu */}
       <AnimatePresence>
         {isCompanyMenuOpen && (
@@ -179,79 +178,97 @@ export default function Header() {
           </motion.div>
         )}
       </AnimatePresence>
-
       {/* Mobile Menu */}
       <AnimatePresence>
         {isOpen && (
-          <motion.nav
-            key="mobile-menu"
-            initial={{ opacity: 0, x: "100%" }}
-            animate={{ opacity: 1, x: "20%" }}
-            exit={{ opacity: 0, x: "100%" }}
-            transition={{ type: "tween" }}
-            className="fixed inset-0 bg-transparent z-50 w-4/5  backdrop-blur-lg overflow-y-auto"
-          >
-            <div className="flex justify-between items-center py-4 px-6 border-b">
-              <button
-                className="text-gray-500 hover:text-gray-600 focus:outline-none"
-                onClick={toggleMenu}
-                aria-label="Close menu"
-              >
-                <X className="h-6 w-6" />
-              </button>
-            </div>
-            <div className="py-6 px-6 text-light space-y-6">
-              <Link href="/services" className="block text-xl font-medium">
-                Services
-              </Link>
-              <Link href="/products" className="block  text-xl font-medium">
-                Products
-              </Link>
-              <Link href="/blog" className="block  text-xl font-medium">
-                Blog
-              </Link>
-              <div>
+          <>
+            <motion.div
+              key="mobile-menu-backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black bg-opacity-20 z-40"
+              onClick={toggleMenu}
+            />
+            <motion.nav
+              key="mobile-menu"
+              initial={{ opacity: 0, x: "100%" }}
+              animate={{ opacity: 1, x: "0%" }}
+              exit={{ opacity: 0, x: "100%" }}
+              transition={{ type: "tween", duration: 0.3 }}
+              className="fixed inset-y-0 right-0 w-[75%] bg-transparent backdrop-blur-md z-50 overflow-y-auto flex flex-col"
+            >
+              <div className="flex justify-between items-center py-4 px-6 border-b border-muted">
                 <button
-                  onClick={toggleMobileCompanyMenu}
-                  className="flex items-center justify-between w-full  text-xl font-medium"
-                  aria-expanded={isMobileCompanyMenuOpen}
+                  className="text-white hover:text-gray-200 focus:outline-none"
+                  onClick={toggleMenu}
+                  aria-label="Close menu"
                 >
-                  Company
-                  <ChevronDown
-                    className={`h-5 w-5 transform transition-transform duration-200 ${isMobileCompanyMenuOpen ? "rotate-180" : ""
-                      }`}
-                  />
+                  <X className="h-6 w-6" />
                 </button>
-                <AnimatePresence>
-                  {isMobileCompanyMenuOpen && (
-                    <motion.div
-                      key="mobile-company-menu"
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.2 }}
-                      className="mt-2 space-y-1"
-                    >
-                      <Link
-                        href="/about"
-                        className="block px-3 py-2 rounded-md text-base font-medium text-muted hover:text-gray-900 hover:bg-gray-100 transition duration-300"
-                      >
-                        About Us
-                      </Link>
-                      <Link
-                        href="/faq"
-                        className="block px-3 py-2 rounded-md text-base font-medium text-muted hover:text-gray-900 hover:bg-gray-100 transition duration-300"
-                      >
-                        FAQ
-                      </Link>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
               </div>
-            </div>
-          </motion.nav>
+              <div className="py-6 px-6 text-white space-y-6 flex-grow">
+                <Link
+                  href="/services"
+                  className="block text-xl font-medium hover:text-gray-200 transition duration-300"
+                >
+                  Services
+                </Link>
+                <Link
+                  href="/products"
+                  className="block text-xl font-medium hover:text-gray-200 transition duration-300"
+                >
+                  Products
+                </Link>
+                <Link
+                  href="/blog"
+                  className="block text-xl font-medium hover:text-gray-200 transition duration-300"
+                >
+                  Blog
+                </Link>
+                <div>
+                  <button
+                    onClick={toggleMobileCompanyMenu}
+                    className="flex items-center justify-between w-full text-xl font-medium hover:text-gray-200 transition duration-300"
+                    aria-expanded={isMobileCompanyMenuOpen}
+                  >
+                    Company
+                    <ChevronDown
+                      className={`h-5 w-5 transform transition-transform duration-200 ${isMobileCompanyMenuOpen ? "rotate-180" : ""
+                        }`}
+                    />
+                  </button>
+                  <AnimatePresence>
+                    {isMobileCompanyMenuOpen && (
+                      <motion.div
+                        key="mobile-company-menu"
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="mt-2 space-y-1"
+                      >
+                        <Link
+                          href="/about"
+                          className="block px-3 py-2 rounded-md text-base font-medium text-blue-200 hover:text-white hover:bg-blue-600 transition duration-300"
+                        >
+                          About Us
+                        </Link>
+                        <Link
+                          href="/faq"
+                          className="block px-3 py-2 rounded-md text-base font-medium text-blue-200 hover:text-white hover:bg-blue-600 transition duration-300"
+                        >
+                          FAQ
+                        </Link>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </div>
+            </motion.nav>
+          </>
         )}
-      </AnimatePresence>
+      </AnimatePresence>{" "}
     </>
   );
 }

@@ -58,7 +58,7 @@ export default function Footer() {
                         rel="noopener noreferrer"
                         className="text-muted hover:text-light transition duration-300"
                       >
-                        <Image
+                        <img
                           src="/images/social-icons/LinkedIn_SocialMedia.svg"
                           alt="LinkedIn"
                           width={24}
@@ -72,7 +72,7 @@ export default function Footer() {
                         rel="noopener noreferrer"
                         className="text-muted hover:text-light transition duration-300"
                       >
-                        <Image
+                        <img
                           src="/images/social-icons/X_SocialMedia.svg"
                           alt="X"
                           width={24}
@@ -86,7 +86,7 @@ export default function Footer() {
                         rel="noopener noreferrer"
                         className="text-muted hover:text-light transition duration-300"
                       >
-                        <Image
+                        <img
                           src="/images/social-icons/Instagram_SocialMedia.svg"
                           alt="Instagram"
                           width={24}

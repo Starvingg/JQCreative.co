@@ -112,10 +112,10 @@ const features = [
 
 export function BentoDemo() {
   return (
-    <div className="py-12 ">
+    <div className="">
       <div className="h-[60rem] bg-muted w-full dark:bg-black dark:bg-dot-white/[0.2] bg-dot-black/[0.2] relative flex items-center justify-center">
         <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
-        <Fader delay={0.3}>
+        <Fader delay={0.5} duration={0.8}>
           <BentoGrid className="">
             {items.map((item, i) => (
               <BentoGridItem

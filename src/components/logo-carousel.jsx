@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Fader from "./fader";
 
 const logos = [
   {
@@ -83,28 +84,32 @@ export default function LogoCarousel() {
   }, []);
 
   return (
-    <div className="relative  w-full overflow-hidden py-5">
-      <div
-        ref={containerRef}
-        className={`flex  flex-row items-center h-16 ${isReady ? "animate-slide" : ""}`}
-      >
-        {[...logos, ...logos].map((logo, index) => (
-          <div
-            key={`${logo.id}-${index}`}
-            className="flex-shrink-0 w-[150px] mx-[30px] md:mx-[60px] lg:mx-[70px] flex items-center justify-center"
-          >
-            <img
-              src={logo.src}
-              alt={logo.alt}
-              width={150}
-              height={100}
-              sizes="(max-width:768px) 100px, 150px"
-              // priority={index < 3}
-              className="max-h-20 h-auto object-contain logo-image"
-            />
-          </div>
-        ))}
-      </div>
+    <div className="relative  w-full overflow-hidden bg-red-400 py-12">
+      <Fader duration={0.6} delay={0.3}>
+        <div
+          ref={containerRef}
+          className={`flex  flex-row items-center h-16 ${
+            isReady ? "animate-slide" : ""
+          }`}
+        >
+          {[...logos, ...logos].map((logo, index) => (
+            <div
+              key={`${logo.id}-${index}`}
+              className="flex-shrink-0 w-[150px] mx-[30px] md:mx-[60px] lg:mx-[70px] flex items-center justify-center"
+            >
+              <img
+                src={logo.src}
+                alt={logo.alt}
+                width={150}
+                height={100}
+                sizes="(max-width:768px) 100px, 150px"
+                // priority={index < 3}
+                className="max-h-20 h-auto object-contain logo-image"
+              />
+            </div>
+          ))}
+        </div>
+      </Fader>
       <div className="absolute inset-y-0 left-0 w-1/6 bg-gradient-to-r from-white to-transparent" />
       <div className="absolute inset-y-0 right-0 w-1/6 bg-gradient-to-l from-white to-transparent" />
       <style jsx>{`

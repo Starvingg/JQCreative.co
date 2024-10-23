@@ -2,7 +2,7 @@
 import { motion, useInView } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
 
-export default function Fader({ children, delay, duration }) {
+export default function Fader({ classStyle, children, delay, duration }) {
   let ref = useRef(null);
   let isInView = useInView(ref);
   let [isVisble, setVisible] = useState(false);
@@ -26,7 +26,9 @@ export default function Fader({ children, delay, duration }) {
         },
       }}
       initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
+      whileInView="visible"
+      viewport={{ once: true }}
+      className={classStyle}
       transition={{ delay, type: "spring", duration: duration }}
     >
       {children}

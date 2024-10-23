@@ -151,7 +151,7 @@ export default function OurProcess() {
                       {contentItems[activeTab].features.map(
                         (feature, index) => (
                           <li key={index}>{feature}</li>
-                        ),
+                        )
                       )}
                     </ul>
                   </div>

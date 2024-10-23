@@ -1,4 +1,6 @@
+"use client";
 import { cn } from "@/lib/utils";
+
 import { BorderBeam } from "./border-beam";
 
 export const BentoGrid = ({ className, children }) => {

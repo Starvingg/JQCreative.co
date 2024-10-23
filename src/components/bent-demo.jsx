@@ -1,3 +1,4 @@
+"use client";
 import { Building, Cpu, Shield, Target, TrendingUp, Zap } from "lucide-react";
 
 import { BentoGrid, BentoGridItem } from "./ui/bento-grid";
@@ -11,6 +12,7 @@ import {
   IconTableColumn,
 } from "@tabler/icons-react";
 import { BorderBeam } from "./ui/border-beam";
+import Fader from "./fader";
 const Skeleton = () => (
   <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-neutral-200 dark:from-neutral-900 dark:to-neutral-800 to-neutral-100"></div>
 );
@@ -108,23 +110,25 @@ const features = [
   },
 ];
 
-export async function BentoDemo() {
+export function BentoDemo() {
   return (
     <div className="py-12 ">
       <div className="h-[60rem] bg-muted w-full dark:bg-black dark:bg-dot-white/[0.2] bg-dot-black/[0.2] relative flex items-center justify-center">
         <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
-        <BentoGrid className="">
-          {items.map((item, i) => (
-            <BentoGridItem
-              key={i}
-              title={item.name}
-              description={item.description}
-              icon={item.icon}
-              header={item.header}
-              className={i === 3 || i === 6 ? "md:col-span-2" : ""}
-            />
-          ))}
-        </BentoGrid>
+        <Fader delay={0.3}>
+          <BentoGrid className="">
+            {items.map((item, i) => (
+              <BentoGridItem
+                key={i}
+                title={item.name}
+                description={item.description}
+                icon={item.icon}
+                header={item.header}
+                className={i === 3 || i === 6 ? "md:col-span-2" : ""}
+              />
+            ))}
+          </BentoGrid>
+        </Fader>
       </div>
     </div>
   );

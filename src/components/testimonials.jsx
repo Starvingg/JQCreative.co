@@ -49,9 +49,9 @@ export default function TestimonialSection() {
   return (
     <section>
       <div className="container mx-auto px-4">
-        <div className="flex flex-col lg:flex-row gap-4 items-center">
-          <div className="w-full lg:w-1/2 mb-8 lg:mb-0">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+        <div className="flex flex-col lg:flex-row gap-2  items-center">
+          <div className="w-full lg:w-1/2 mb-8  lg:mb-0">
+            <h2 className="text-3xl sm:text-4xl font-bold text-black mb-4">
               What Our Customers Say
             </h2>
             <p className="text-lg sm:text-xl text-gray-600">
@@ -59,7 +59,7 @@ export default function TestimonialSection() {
               say about our services.
             </p>
           </div>
-          <div className="w-full lg:w-1/2 relative h-[400px] sm:h-[300px]">
+          <div className="w-full lg:w-1/2 relative h-[40rem] sm:h-[30rem]">
             <div className="absolute inset-0 flex items-center justify-center">
               <CardStack items={CARDS} />
             </div>

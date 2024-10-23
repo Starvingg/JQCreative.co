@@ -10,7 +10,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 // Configuration object for easy customization
 const config = {
   scene: {
-    background: 0xFFFFFF,
+    background: 0xffffff,
     fogColor: 0x000000,
     fogNear: 1,
     fogFar: 11,
@@ -34,7 +34,7 @@ const config = {
     height: 0.5,
   },
   cubes: {
-    count: 20,
+    count: 50,
     size: 0.2,
     color: 0x000000,
     wireframeColor: 0xFFFFFF,
@@ -216,11 +216,11 @@ export function HeroSection() {
   }, [])
 
   return (
-    <section className="container mx-auto px-4 py-24">
+    <section className="container bg-red-500  mx-auto px-4 py-24">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div>
           <motion.h1 
-            className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6 text-accent"
+            className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6 text-dark font-switzerFont"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -228,7 +228,7 @@ export function HeroSection() {
             Redefining Digital Landscapes
           </motion.h1>
           <motion.p 
-            className="text-xl text-muted mb-8"
+            className="text-xl text-dark  mb-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -240,10 +240,10 @@ export function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
           >
-            <Button size="lg" className="mr-4 bg-primary text-light hover:bg-secondary">
+            <Button size="lg" className="mr-4 bg-primary text-dark font-switzerFont hover:bg-secondary">
               Our Projects <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
-            <Button size="lg" variant="outline" className="border-accent text-accent hover:bg-accent hover:text-darker">
+            <Button size="lg" variant="outline" className="border-accent text-dark hover:bg-accent hover:text-darker">
               Meet the Team
             </Button>
           </motion.div>

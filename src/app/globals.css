@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
+  * {
   display: border-box;
 }
 
@@ -31,22 +31,22 @@
   font-style: normal;
 }
 .spline-animation {
-  position: relative;
+    position: relative;
 }
 
 .spline-canvas {
-  width: 100%;
-  height: 100vh; /* Or any specific height */
+    width: 100%;
+    height: 100vh; /* Or any specific height */
 }
 
 .overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(38, 99, 235, 0.5); /* Semi-transparent primary blue */
-  pointer-events: none; /* Ensure the overlay does not block interactions */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(38, 99, 235, 0.5); /* Semi-transparent primary blue */
+    pointer-events: none; /* Ensure the overlay does not block interactions */
 }
 /*
 Switzer Font Weight Scaling
@@ -61,18 +61,18 @@ Switzer Font Weight Scaling
 900 - Black
 */
 :root {
-  --background: #ecf5ff; /* Blue background */
-  --foreground: #ffffff; /* Adjust the text color to white for contrast */
+  --background: #385895; /* Blue background */
+  --foreground: #ffffff;  /* Adjust the text color to white for contrast */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground: #ededed; /* Light text for dark mode */
+    --foreground: #ededed;  /* Light text for dark mode */
   }
 }
 
 body {
-  background-color: var(--background);
+  background: linear-gradient(135deg, var(--deep-blue) 0%, var(--light-blue) 50%, var(--deep-blue) 100%);
   color: var(--foreground);
   margin: 0; /* Ensure no margin around the body */
   height: 100vh; /* Make the body take full viewport height */
@@ -96,3 +96,4 @@ p {
   font-family: "Switzer-Variable";
   font-weight: 400;
 }
+

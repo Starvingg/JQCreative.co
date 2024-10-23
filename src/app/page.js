@@ -7,11 +7,11 @@ import LogoCarousel from "@/components/logo-carousel";
 import OurProcess from "@/components/our-process";
 import ScrollBar from "@/components/scroll-bar";
 import TestimonialSection from "@/components/testimonials";
-import { BentoCard } from "@/components/ui/bento-grid";
 
 export default function Home() {
   return (
-    <div className="">
+    <div className="flex flex-col  w-full ">
+      <HeroAnimation />
       <LogoCarousel />
       <BentoDemo />
       <TestimonialSection />

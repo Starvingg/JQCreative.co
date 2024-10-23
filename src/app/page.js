@@ -10,7 +10,8 @@ import TestimonialSection from "@/components/testimonials";
 
 export default function Home() {
   return (
-    <div className="flex flex-col gap-12">
+    <div className="flex flex-col  w-full ">
+      <HeroAnimation />
       <LogoCarousel />
       <BentoDemo />
       <TestimonialSection />

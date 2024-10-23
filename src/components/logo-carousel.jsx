@@ -84,7 +84,7 @@ export default function LogoCarousel() {
   }, []);
 
   return (
-    <div className="relative  w-full overflow-hidden bg-red-400 py-12">
+    <div className="relative  w-full overflow-hidden py-12 bg-light">
       <Fader duration={0.6} delay={0.3}>
         <div
           ref={containerRef}

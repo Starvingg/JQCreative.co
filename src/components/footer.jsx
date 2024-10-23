@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import Logo from "./logo";
+import Fader from "./fader";
 
 export default function Footer() {
   const [isHovered, setIsHovered] = useState(false);
@@ -13,8 +14,8 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-darker text-light py-12">
-      <div className="container mx-auto px-4">
+    <footer className="bg-darker text-light py-14">
+      <Fader classStyle="container mx-auto px-4" delay={0.6} duration={0.6}>
         <div className="flex flex-col md:flex-row justify-between items-center mb-8">
           <div
             className="mb-4 md:mb-0 cursor-pointer"
@@ -111,7 +112,7 @@ export default function Footer() {
           © {new Date().getFullYear()} JQ Creative Company LLC. All rights
           reserved.
         </div>
-      </div>
+      </Fader>
     </footer>
   );
 }

@@ -15,7 +15,6 @@ export default function Home() {
       <LogoCarousel />
       <BentoDemo />
       <TestimonialSection />
-
       <OurProcess />
       <Footer />
     </div>

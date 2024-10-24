@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
+import Logo from "./logo";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -93,11 +94,7 @@ export default function Header() {
           <div className="flex justify-between items-center   py-3">
             <div className="flex-shrink-0 px-4">
               <Link href="/" className="flex items-center space-x-2">
-                <img
-                  src="/images/JQC_SVG_LOGO.svg"
-                  alt="Creative Agency Logo"
-                  className="h-6"
-                />
+                <Logo currColor="#fff" />
               </Link>
             </div>
 

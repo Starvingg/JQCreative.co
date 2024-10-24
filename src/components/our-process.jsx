@@ -90,7 +90,7 @@ export default function OurProcess() {
   const [activeTab, setActiveTab] = useState("Research");
 
   return (
-    <section className="bg-light py-16 overflow-hidden">
+    <section className=" py-12 overflow-hidden bg-light">
       <div className="container mx-auto px-4 relative">
         <h2 className="text-4xl font-bold mb-8 text-gray-900">
           Our Design Process
@@ -151,7 +151,7 @@ export default function OurProcess() {
                       {contentItems[activeTab].features.map(
                         (feature, index) => (
                           <li key={index}>{feature}</li>
-                        ),
+                        )
                       )}
                     </ul>
                   </div>
